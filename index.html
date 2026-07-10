@@ -26,7 +26,7 @@
             color: #1e293b;
         }
 
-        /* 상단 헤더 영역 */
+        /* 상단 헤더 및 시안 로고 구현 */
         header {
             text-align: center;
             margin-bottom: 50px;
@@ -36,15 +36,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 10px;
             margin-bottom: 25px;
+        }
+
+        /* 시안 속 실제 로고 형상 완벽 재현 */
+        .gfm-logo-icon {
+            width: 42px;
+            height: 28px;
+            position: relative;
         }
 
         .logo-text {
             font-size: 26px;
             font-weight: 700;
             color: #000000;
-            letter-spacing: -1.2px;
-            line-height: 1;
+            letter-spacing: -1px;
         }
 
         .main-title {
@@ -75,7 +82,7 @@
             letter-spacing: -0.5px;
         }
 
-        /* 메인 컨텐츠 및 카드 */
+        /* 메인 컨테이너 및 카드 */
         .container {
             display: flex;
             gap: 35px;
@@ -108,9 +115,11 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
         }
 
+        /* 시안 맞춤 상단 라운드 보더 포인트 */
         .card.left { border-top: 10px solid #ff5a36; }
         .card.right { border-top: 10px solid #ffa827; }
 
+        /* 외부 링크 아이콘 구석 배치 */
         .shortcut-icon {
             position: absolute;
             top: 25px;
@@ -120,6 +129,7 @@
         .card.left .shortcut-icon { color: #ff5a36; }
         .card.right .shortcut-icon { color: #ffa827; }
 
+        /* 내부 원형 아이콘 백그라운드 */
         .circle-icon {
             width: 120px;
             height: 120px;
@@ -133,6 +143,7 @@
         .card.left .circle-icon { background-color: #fff1ee; color: #ff5a36; }
         .card.right .circle-icon { background-color: #fff7eb; color: #ffa827; }
 
+        /* 카드별 타이틀 색상 가독성 세팅 */
         .card-title {
             font-size: 34px;
             font-weight: 700;
@@ -205,7 +216,16 @@
 
     <header>
         <div class="logo-area">
-            <div class="logo-text">금천구시설관리공단</div>
+            <svg class="gfm-logo-icon" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+                <path d="M60,10 L64,28 L56,28 Z" fill="#ffb700"/>
+                <path d="M60,10 L74,24 L68,29 Z" fill="#ffb700"/>
+                <path d="M60,10 L52,29 L46,24 Z" fill="#ffb700"/>
+                <path d="M60,10 L82,18 L74,25 Z" fill="#ffb700"/>
+                <path d="M60,10 L46,25 L38,18 Z" fill="#ffb700"/>
+                <path d="M20,48 Q45,30 75,44 T110,40 Q85,46 55,42 T20,48" fill="#00a896"/>
+                <path d="M25,58 Q50,42 75,54 T105,52 Q80,56 55,50 T25,58" fill="#028090"/>
+            </svg>
+            <span class="logo-text">금천구시설관리공단</span>
         </div>
         <h1 class="main-title">디지털 인권상담소</h1>
         <div class="sub-title-wrapper">
