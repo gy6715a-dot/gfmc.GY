@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>금천구시설관리공단 - 디지털 인권상담소</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #eef4fc 0%, #ffffff 50%, #eef4fc 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 20px;
+            color: #1e293b;
+        }
+
+        /* 상단 헤더 영역 */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .logo-text {
+            font-size: 26px;
+            font-weight: 700;
+            color: #000000;
+            letter-spacing: -1.2px;
+            line-height: 1;
+        }
+
+        .main-title {
+            font-size: 54px;
+            font-weight: 800;
+            color: #00337c;
+            letter-spacing: -1.5px;
+            margin-bottom: 25px;
+        }
+
+        .sub-title-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .line {
+            width: 100px;
+            height: 1px;
+            background-color: #cbd5e1;
+        }
+
+        .sub-title {
+            font-size: 19px;
+            color: #334155;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+        }
+
+        /* 메인 컨텐츠 영역 */
+        .container {
+            display: flex;
+            gap: 35px;
+            max-width: 1020px;
+            width: 100%;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        /* 카드 기본 구조 고정 */
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            flex: 1;
+            max-width: 480px;
+            height: 420px; /* 카드의 높이를 420px로 고정 */
+            text-decoration: none;
+            color: inherit;
+            position: relative; /* 자식 요소 절대 위치 배치를 위한 기준점 */
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .card.left { border-top: 10px solid #ff5a36; }
+        .card.right { border-top: 10px solid #ffa827; }
+
+        .shortcut-icon {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 20px;
+        }
+        .card.left .shortcut-icon { color: #ff5a36; }
+        .card.right .shortcut-icon { color: #ffa827; }
+
+        /* [절대정렬 1] 원형 아이콘 배치 상단으로부터 50px로 고정 */
+        .circle-icon {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 44px;
+        }
+        .card.left .circle-icon { background-color: #fff1ee; color: #ff5a36; }
+        .card.right .circle-icon { background-color: #fff7eb; color: #ffa827; }
+
+        /* [절대정렬 2] 타이틀 텍스트 영역 상단으로부터 200px로 고정 */
+        .card-title-wrapper {
+            position: absolute;
+            top: 200px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .card-title {
+            font-size: 34px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .card.left .card-title { color: #ff5a36; }
+        .card.right .card-title { color: #ff8a00; }
+
+        .card-subtitle {
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+        .card.right .card-subtitle { color: #ff8a00; }
+
+        /* [절대정렬 3] 핵심! 구분선의 높이를 상단으로부터 딱 305px 위치로 완전 고정 */
+        .card-line {
+            position: absolute;
+            top: 305px;
+            left: 12.5%; /* 중앙 정렬 (폭이 75%이므로 좌측 여백 12.5%) */
+            width: 75%;
+            height: 1px;
+            background-color: #e2e8f0;
+        }
+
+        /* [절대정렬 4] 하단 설명문 위치를 상단으로부터 330px로 고정 */
+        .card-desc {
+            position: absolute;
+            top: 330px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 19px;
+            color: #334155;
+            line-height: 1.6;
+            font-weight: 500;
+            padding: 0 20px;
+        }
+
+        /* 하단 알림선 및 저작권 정보 */
+        footer {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .info-notice {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #004ec4;
+            font-weight: 600;
+            font-size: 16px;
+            border-radius: 30px;
+        }
+
+        .copyright {
+            font-size: 15px;
+            color: #94a3b8;
+        }
+
+        /* 모바일 대응 (반응형 화면 분기) */
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                gap: 25px;
+                padding: 0 10px;
+            }
+            .card {
+                width: 100%;
+                max-width: 480px;
+                height: 420px; /* 모바일에서도 그리드가 틀어지지 않게 고정 */
+            }
+            .main-title {
+                font-size: 38px;
+            }
+            .line {
+                width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <div class="logo-text">금천구시설관리공단</div>
+        </div>
+        <h1 class="main-title">디지털 인권상담소</h1>
+        <div class="sub-title-wrapper">
