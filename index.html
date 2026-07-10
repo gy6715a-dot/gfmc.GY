@@ -75,32 +75,34 @@
             letter-spacing: -0.5px;
         }
 
-        /* 메인 컨텐츠 및 카드 */
+        /* 메인 컨텐츠 구조 관리 */
         .container {
             display: flex;
             gap: 35px;
-            max-width: 960px;
+            max-width: 1020px;
             width: 100%;
             justify-content: center;
             margin-bottom: 60px;
         }
 
+        /* 카드 기본 레이아웃 (유연한 내부 정렬) */
         .card {
             background: #ffffff;
             border-radius: 24px;
             flex: 1;
-            max-width: 440px;
-            padding: 50px 40px;
+            max-width: 480px;
+            padding: 50px 30px;
             text-align: center;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
             text-decoration: none;
             color: inherit;
             position: relative;
             transition: transform 0.25s ease, box-shadow 0.25s ease;
+            
+            /* 핵심: 내부 요소들을 위아래 정렬하되 균일하게 분할 */
             display: flex;
             flex-direction: column;
             align-items: center;
-            border: 1px solid #e2e8f0;
         }
 
         .card:hover {
@@ -120,6 +122,7 @@
         .card.left .shortcut-icon { color: #ff5a36; }
         .card.right .shortcut-icon { color: #ffa827; }
 
+        /* 원형 아이콘 */
         .circle-icon {
             width: 120px;
             height: 120px;
@@ -129,31 +132,54 @@
             justify-content: center;
             font-size: 44px;
             margin-bottom: 30px;
+            flex-shrink: 0;
         }
         .card.left .circle-icon { background-color: #fff1ee; color: #ff5a36; }
         .card.right .circle-icon { background-color: #fff7eb; color: #ffa827; }
 
+        /* [선 맞춤 해결책] 타이틀 영역의 최소 높이를 확보하여 양쪽 카드 구분선 높이를 100% 일치시킴 */
+        .card-title-wrapper {
+            min-height: 96px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
         .card-title {
             font-size: 34px;
             font-weight: 700;
-            margin-bottom: 25px;
-            line-height: 1.3;
+            line-height: 1.25;
+            word-break: keep-all; /* 모바일에서 한글 자모가 낱개로 깨지는 현상 방지 */
         }
         .card.left .card-title { color: #ff5a36; }
         .card.right .card-title { color: #ff8a00; }
 
+        .card-subtitle {
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        .card.right .card-subtitle { color: #ff8a00; }
+
+        /* 얇은 구분선 */
         .card-line {
             width: 75%;
             height: 1px;
             background-color: #e2e8f0;
             margin-bottom: 25px;
+            flex-shrink: 0;
         }
 
+        /* 하단 설명글 */
         .card-desc {
             font-size: 19px;
             color: #334155;
             line-height: 1.6;
             font-weight: 500;
+            width: 100%;
         }
 
         /* 하단 알림선 및 저작권 정보 */
@@ -174,6 +200,8 @@
             font-weight: 600;
             font-size: 16px;
             border-radius: 30px;
+            padding: 0 10px;
+            word-break: keep-all;
         }
 
         .copyright {
@@ -181,22 +209,59 @@
             color: #94a3b8;
         }
 
-        /* 모바일 대응 반응형 브레이크포인트 */
-        @media (max-width: 768px) {
+        /* 📱 모바일 및 태블릿 화면 최적화 (반응형) */
+        @media (max-width: 992px) {
+            body {
+                padding: 40px 16px;
+            }
+            header {
+                margin-bottom: 35px;
+            }
+            .main-title {
+                font-size: 36px;
+                letter-spacing: -1px;
+                margin-bottom: 15px;
+            }
+            .logo-text {
+                font-size: 22px;
+            }
+            .sub-title {
+                font-size: 16px;
+            }
+            .line {
+                width: 40px;
+            }
             .container {
-                flex-direction: column;
+                flex-direction: column; /* 세로 배열로 변경 */
                 align-items: center;
-                padding: 0 10px;
+                gap: 25px;
+                margin-bottom: 40px;
             }
             .card {
                 width: 100%;
-                max-width: 100%;
+                max-width: 440px;
+                padding: 40px 24px;
             }
-            .main-title {
-                font-size: 38px;
+            /* 모바일에서는 각자 글자 수에 따라 유연하게 늘어나도록 패딩 처리 */
+            .card-title-wrapper {
+                min-height: auto; 
+                margin-bottom: 15px;
             }
-            .line {
-                width: 50px;
+            .card-title {
+                font-size: 28px;
+            }
+            .card-subtitle {
+                font-size: 20px;
+            }
+            .card-line {
+                margin-bottom: 15px;
+            }
+            .card-desc {
+                font-size: 17px;
+            }
+            .info-notice {
+                font-size: 14px;
+                line-height: 1.4;
             }
         }
     </style>
@@ -221,7 +286,9 @@
             <div class="circle-icon">
                 <i class="fa-regular fa-comment-dots"></i>
             </div>
-            <h2 class="card-title">인권상담소</h2>
+            <div class="card-title-wrapper">
+                <h2 class="card-title">인권상담소</h2>
+            </div>
             <div class="card-line"></div>
             <p class="card-desc">
                 인권침해 규정 · 사례<br>
@@ -234,7 +301,10 @@
             <div class="circle-icon">
                 <i class="fa-solid fa-bullhorn"></i>
             </div>
-            <h2 class="card-title">알리GO바로잡GO<br><span style="font-size: 24px; font-weight: 600;">(익명신고센터)</span></h2>
+            <div class="card-title-wrapper">
+                <h2 class="card-title">알리GO바로잡GO</h2>
+                <div class="card-subtitle">(익명신고센터)</div>
+            </div>
             <div class="card-line"></div>
             <p class="card-desc">
                 인권침해 및 부패행위<br>
